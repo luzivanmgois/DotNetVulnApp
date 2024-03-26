@@ -10,7 +10,6 @@ namespace brokenaccesscontrol.Controllers;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-
     private readonly ILogger<UserController> _logger;
 
     public UserController(ILogger<UserController> logger)
@@ -21,7 +20,6 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Register([FromBody]UserRequest userRequest)
     {
-
         try{
             
             if (await UserRepository.LoginExist(userRequest.Login))
@@ -44,10 +42,7 @@ public class UserController : ControllerBase
             _logger.LogError(ex, "General error");
             return StatusCode(500, "Internal server error");            
         }
-
-
     }
-
 
     [HttpPost]
     [Route("passwordrecovery")]
@@ -78,7 +73,6 @@ public class UserController : ControllerBase
     {
         try{
 
-            
             var user = await UserRepository.GetUserById(id);
 
             if (user != null)
@@ -96,7 +90,6 @@ public class UserController : ControllerBase
             return StatusCode(500, "Internal server error");            
         }     
     }  
-
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(string id)
@@ -117,6 +110,4 @@ public class UserController : ControllerBase
             return StatusCode(500, "Internal server error");            
         }        
     }
-
-
 }

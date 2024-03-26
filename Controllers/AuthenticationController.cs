@@ -10,7 +10,6 @@ namespace brokenaccesscontrol.Controllers;
 [Route("api/[controller]")]
 public class AuthenticationController : ControllerBase
 {
-
     private readonly ILogger<AuthenticationController> _logger;
 
     public AuthenticationController(ILogger<AuthenticationController> logger)
@@ -25,7 +24,6 @@ public class AuthenticationController : ControllerBase
         // Recupera o usuário
         var user = await UserRepository.Login(login);
 
-
         // Verifica se o usuário existe
         if (user == null)
         {
@@ -34,8 +32,7 @@ public class AuthenticationController : ControllerBase
             {
                 message = "User not found!"
                 
-            });
-            
+            });            
         }
 
         if (user.Password == UtilService.ReturnMD5(login.Password)){
@@ -48,9 +45,7 @@ public class AuthenticationController : ControllerBase
             {
                 User = user,
                 token = token
-            });   
-                   
-
+            });        
         }
         else{
             AccessLog.Error($"User '{login.Login}' Password '{login.Password}'");
@@ -58,8 +53,7 @@ public class AuthenticationController : ControllerBase
             {
                 message = "Wrong password!!!"
             });    
-        }
-        
+        }        
     }
 
     [HttpPost]
@@ -68,7 +62,6 @@ public class AuthenticationController : ControllerBase
     {
         // Recupera o usuário
         var user = await UserRepository.LoginSQL(login);
-
 
         // Verifica se o usuário existe
         if (user == null)
@@ -86,8 +79,6 @@ public class AuthenticationController : ControllerBase
                 User = user,
                 token = token
             });              
-        }
-        
+        }        
     }
-
 }
