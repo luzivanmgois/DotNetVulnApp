@@ -89,7 +89,7 @@ public static class UserRepository
     {
         var conn = SqliteConfigConnection.GetSQLiteConnection();
         string query = "Select id, name, login, password, dateInsert, dateUpdate, isAdmin, inativo, dateChangePassword from users "  + 
-            "where login = '"+login.Login+"' and password = '"+UtilService.ReturnMD5(login.Password)+"' and inativo = 0";
+            "where login = '"+login.Login+"' and password = '"+login.Password+"' and inativo = 0";
         var user = await conn.QueryAsync<User>(query);
         return user.FirstOrDefault();
     }  
